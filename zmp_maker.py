@@ -405,7 +405,7 @@ for i in range(len(blocks)):
         f.write("$ggen1 nbl=%d,x1min=%.4e,x1max=%.4e,igrid=%d,x1rat=%.3f,lgrid=.%s. /\n"%(n, x1, x2, dir, r, done))
 
 dx1 = (starthighres + s) - startingpoint
-x10 = starthighres + (3/2)*s
+x10 = starthighres + (3./2.)*s
 
 f.write("$ggen2 nbl=%d,x2min=%.4e,x2max=%.4e,igrid=%d,x2rat=%.3f,lgrid=.false. /\n" %(x2_blk[0], x2_min1, s * -1, -1, x2_r[0]))
 f.write("$ggen2 nbl=%d,x2min=%.4e,x2max=%.4e,igrid=%d,x2rat=%.3f,lgrid=.false. /\n" %(64, s * -1, s, 1, 1))
