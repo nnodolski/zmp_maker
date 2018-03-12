@@ -423,7 +423,7 @@ f.write("$ggen3 nbl=%d,x3min=%.5e,x3max=%.5e,igrid=%d,x3rat=%.3f,lgrid=.true. /\
 f.write(' &grvcon /\n')
 f.write(' &radcon /\n')
 f.write(' &eqos gamma=1.4,mmw=1.0D0 /\n')
-f.write(' &pgen r=%.4e, x10=%.4e , d0=0.917, e0=0.6, v11=%.2e, e1=0.0, \n'%(s/2., x10, v * -1))
+f.write(' &pgen r=%.5e, x10=%.5e , d0=0.917, e0=0.6, v11=%.2e, e1=0.0, \n'%(s/2., x10, v * -1))
 f.write('     dx1safe=%.5e ,zpost0=-2.50e07,dzpost=4.0e07,theta0=%.5f,\n'%(dx1, ang))
 f.write('     lat0=44.02 /\n')
 f.write(' &gcon igcon=5,x1fac=1.0/\n')
