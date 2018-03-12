@@ -264,7 +264,7 @@ kzones = 3.5
 
 # Calculate Low-res distances
 def zones(d,r,b):
-        length = (d/32)*((1-r**b)/(1-r)) + d
+        length = (d/32)*((1.-r**b)/(1.-r)) + d
         return length
 
 while(bad == True):
