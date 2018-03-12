@@ -94,6 +94,13 @@ h = get_inp(150.)*1.e3*1.e2
 print("Impact angle(deg) [45]: ")
 ang = get_inp(45.)*np.pi/180.
 
+## Add the estimated grid size before and after l1 - before and l2 - after
+print("Estimated grid size before and after high res zone (m) [9500 and 150000]")
+lorig = get_inp_tuple(9500, 150000)
+
+l1orig = lorig[0]*1.e2
+l2orig = lorig[1]*1.e2
+
 
 start = h/np.cos(ang)
 
@@ -115,10 +122,6 @@ print("Collider zone: %d blocks, from %.4f m before to %.4f m after"%(ncollider,
 blocks = [[nbef + ntarget + naft, 1., 1., lbef + s + laft]]
 
 good = False
-
-## Add the estimated grid size before and after l1 - before and l2 - after
-l1orig = 9500*1.e2
-l2orig = 150000*1.e2
 
 while(good == False):
         blocks2 = []
