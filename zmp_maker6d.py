@@ -70,6 +70,10 @@ maxr = get_inp(1000.)*1.e2
 print("Size of impactor (m) [1000]: ")
 s = get_inp(1000.)*1.e2
 
+## Impactor Velocity
+print("Velocity of Impactor (km/s) [61.4]")
+v = get_inp(61.4)*1.e5
+
 ## Resolution at the impactor
 sres = (s/32)
 
@@ -416,7 +420,7 @@ f.write("$ggen3 nbl=%d,x3min=%.6e,x3max=%.6e,igrid=%d,x3rat=%.3f,lgrid=.true. /\
 f.write(' &grvcon /\n')
 f.write(' &radcon /\n')
 f.write(' &eqos gamma=1.4,mmw=1.0D0 /\n')
-f.write(' &pgen r=%.6e, x10=%.6e , d0=0.917, e0=0.6, v11=-6.14e06, e1=0.0, \n'%(s/2., x10))
+f.write(' &pgen r=%.4e, x10=%.4e , d0=0.917, e0=0.6, v11=%.2e, e1=0.0, \n'%(s/2., x10, v * -1))
 f.write('     dx1safe=%.6e ,zpost0=-2.50e07,dzpost=4.0e07,theta0=%.6f,\n'%(dx1, ang))
 f.write('     lat0=44.02 /\n')
 f.write(' &gcon igcon=5,x1fac=1.0/\n')
