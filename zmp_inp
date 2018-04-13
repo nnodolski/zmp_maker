@@ -1,0 +1,60 @@
+ &GEOMCONF  LGEOM    = 1,
+            LDIMEN   = 3 /
+ &PHYSCONF  LRAD     = 0,
+            LEOS     = 1,
+            NSPEC    = 3,
+            XHYDRO   = .TRUE.,
+            XFORCE   = .TRUE.,
+            XMHD     = .FALSE.,
+            XTOTNRG  = .false.,
+            XGRAV    = .false.,
+            XPTMASS  = .false.,
+            XISO     = .false.,
+            XSUBAV   = .false.,
+            XVGRID   = .true.,
+            XZGRAV   = .true. /
+ &IOCONF    XASCII   = .false.,
+            XHDF     = .true.,
+            XTSL     = .true.,
+            XFLX     = .true.,
+            XRESTART = .true.,
+            XPCLE    = .false. /
+ &PRECONF   SMALL_NO = 1.0D-99,
+            LARGE_NO = 1.0D+99 /
+ &ARRAYCONF IZONES   = 69 ,
+            JZONES   = 136,
+            KZONES   = 136,
+            MAXIJK   = 136 /
+ &ATMCONF   XGND     = .false.,
+            XJUP     = .false.,
+            XJUP_DRAKE = .true.,
+            XTITAN   = .false.,
+            XVENUS   = .false. /
+ &mpitop ntiles(1)=6,ntiles(2)=2,ntiles(3)=2,periodic=3*.false. /
+ &rescon tdump=0.0, dtdump=-0.5,id='ae',irestart=0,resfile='resae000000.000'/
+ &pcon nlim=9999999, tlim=20.0, cpulim= 9999999.0, mbatch=1 /
+ &hycon qcon=0.5,courno=0.65,dtrat=1.0e-03 /
+ &iib niis(1)=6 /
+ &oib nois(1)=2 /
+ &ijb nijs(1)=2 /
+ &ojb nojs(1)=2 /
+ &ikb niks(1)=2 /
+ &okb noks(1)=2 /
+$ggen1 nbl=51,x1min=1.3027e+07,x1max=1.3992e+07,igrid=-1,x1rat=1.060,lgrid=.false. /
+$ggen1 nbl=128,x1min=1.3992e+07,x1max=1.4392e+07,igrid=1,x1rat=1.000,lgrid=.false. /
+$ggen1 nbl=116,x1min=1.4392e+07,x1max=1.7693e+07,igrid=1,x1rat=1.030,lgrid=.false. /
+$ggen1 nbl=119,x1min=1.7693e+07,x1max=2.9593e+07,igrid=1,x1rat=1.000,lgrid=.true. /
+$ggen2 nbl=104,x2min=-1.0028e+07,x2max=-1.0000e+05,igrid=-1,x2rat=1.050,lgrid=.false. /
+$ggen2 nbl=64,x2min=-1.0000e+05,x2max=1.0000e+05,igrid=1,x2rat=1.000,lgrid=.false. /
+$ggen2 nbl=104,x2min=1.0000e+05,x2max=1.0028e+07,igrid=1,x2rat=1.050,lgrid=.true. /
+$ggen3 nbl=104,x3min=-1.0028e+07,x3max=-1.0000e+05,igrid=-1,x3rat=1.050,lgrid=.false. /
+$ggen3 nbl=64,x3min=-1.0000e+05,x3max=1.0000e+05,igrid=1,x3rat=1.000,lgrid=.false. /
+$ggen3 nbl=104,x3min=1.0000e+05,x3max=1.0028e+07,igrid=1,x3rat=1.050,lgrid=.true. /
+ &grvcon /
+ &radcon /
+ &eqos gamma=1.4,mmw=1.0D0 /
+ &pgen r=5.0000e+04, x10=1.4142e+07 , d0=0.917, e0=0.6, v11=-6.14e+06, e1=0.0, 
+     dx1safe=1.0649e+06 ,zpost0=-2.50e07,dzpost=4.0e07,theta0=0.7854,
+     lat0=44.02 /
+ &gcon igcon=5,x1fac=1.0/
+ &iocon thdf=0.0, dthdf=0.25, ttsl=0.0, dttsl=0.25, tpcle=0.0, dtpcle=0.5 /
