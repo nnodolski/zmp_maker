@@ -169,16 +169,16 @@ while(good == False):
                 ltry = sres*(1.-(r[0]**(i)))/(1.-r[0])
                 percdiff = (ltry - l1orig)/l1orig
                 if(np.abs(percdiff) <= 0.03):
-                        n1 = i
+                        n1 = i             ## output of this loop
                         l1 = ltry
-                        l1best = l1
+                        l1best = l1   ## output of this loop
 
         for i in range(1,300):
                 ltry = sres*(1.-(r[1]**(i)))/(1.-r[1])
                 percdiff = (ltry - l2orig)/l2orig
                 if(np.abs(percdiff) <= 0.03):
-                        n2 = i
-                        l2 = ltry
+                        n2 = i        ## output of this loop
+                        l2 = ltry     ## output of this loop
 
 
         ## Calculate the maximum grid spacing at the endpoints
@@ -303,29 +303,105 @@ print('===============================================\n')
 bad = True
 jzones = 3.5
 kzones = 3.5
-
+x2_blk = [None] * 2
+x3_blk = [None] * 2
 # Calculate Low-res distances
+'''
 def zones(d,r,b):
         length = (d/32)*((1.-r**b)/(1.-r)) + d
         return length
+'''
+'''
+def zones(d,r,length):
+        for i in range(1,300):
+            ltest = (d/32)*((1.-r**i)/(1.-r)) + d
+            percdiff = (ltest - length)/length
+            if(np.abs(percdiff) <= 0.03):
+                    blocks = i        
+                    newlength = ltest 
+        return newlength, blocks
+'''
+
+def zones(d,r,length):
+        ltest = d
+        for i in range(1,300):
+            ltest += (d/32) * r**(i-1) 
+            percdiff = (ltest - length)/length
+            if(np.abs(percdiff) <= 0.03):
+                    blocks = i        
+                    newlength = ltest 
+        return newlength, blocks
+
+'''
+def zones(d,r,length):
+        dx = d/32
+        block1 = np.log(((length - d)*(r-1)+(dx))/dx)
+        block2 = np.log(r)
+        blocks = int(np.floor(block1 / block2))
+        newlength = (d/32)*((1.-r**blocks)/(1.-r)) + d
+        return newlength, blocks
+'''
+def check_blocks(check, zones):
+	for i in range(len(check)):
+		if (check[i] < zones):
+			flag = 1
+			return flag
+	flag = 0
+	return flag
+
+
+def mincpu(cpus, blocks, check):
+	for i in range(cpus, 100):
+		zones = (blocks) / i
+		print(i)
+		if (zones%1 == 0) & (check_blocks(check, zones) == 0):
+			return i
+	return cpus
+
 
 while(bad == True):
 
         jzones = 3.5
         kzones = 3.5
 
+        
         while((jzones %1 != 0) or (kzones %1 != 0)):
+		flag2 = 0
+		flag3 = 0
                 # Define number of cpus for zone calculations
                 print("Enter number of cpus for x2 and x3 direction [Default 2 and 2]: ")
                 ncpu2 = get_inp_tuple(2, 2)
-                
+
+
+
+
+
+                '''
                 # Number of blocks in each low-res area
                 print("Enter number of desired number of blocks before and after impactor for x2 dimension [Default 104 and 104]: ")
                 x2_blk = get_inp_tuple(104, 104)
 
                 print("Enter number of desired number of blocks before and after impactor for x3 dimension [Default 104 and 104]: ")
                 x3_blk = get_inp_tuple(104, 104)
+                '''
 
+
+
+
+
+                # Length Before and after Impactor
+                print("Enter the grid length before and after impactor for x2 dimension in km [Default %.4f km and %.4f km]: " %((l2/100000)*0.4, (l2/100000)*0.4))
+                x2_len = get_inp_tuple(l2*0.4, l2*0.4)
+                if ((x2_len[0] != l2*0.4) & (x2_len[1] != l2*0.4)):
+                    x2_len = (x2_len[0]*1.e5, x2_len[1]*1.e5)
+
+                # Length Before and after Impactor
+                print("Enter the grid length before and after impactor for x3 dimension in m [Default %.4f km and %.4f km]: " %((l2/100000)*0.4, (l2/100000)*0.4))
+                x3_len = get_inp_tuple(l2*0.4, l2*0.4)
+                if ((x3_len[0] != l2*0.4) & (x3_len[1] != l2*0.4)):
+                    x3_len = (x3_len[0]*1.e5, x3_len[1]*1.e5)
+
+                
                 # Ratios
                 print("Ratio before, after for x2 [Default 1.05 and 1.05]: ")
                 x2_r = get_inp_tuple(1.05, 1.05)
@@ -334,24 +410,68 @@ while(bad == True):
                 x3_r = get_inp_tuple(1.05, 1.05)
 
                 # Calculate Low-res zones before and after impactor in the x2 direction
-                x2_min1 = zones(s, x2_r[0], x2_blk[0]) * -1
-                x2_max3 = zones(s, x2_r[1], x2_blk[1])
+                x2_min1, x2_blk[0] = zones(s, x2_r[0], x2_len[0])
+                x2_min1 *= -1
+                x2_max3, x2_blk[1] = zones(s, x2_r[1], x2_len[1])
 
                 # Calculate Low-res zones before and after impactor in the x3 direction
-                x3_min1 = zones(s, x3_r[0], x3_blk[0]) * -1
-                x3_max3 = zones(s, x3_r[1], x3_blk[1])
+                x3_min1, x3_blk[0] = zones(s, x3_r[0], x3_len[0])
+                x3_min1 *= -1
+                x3_max3, x3_blk[1] = zones(s, x3_r[1], x3_len[1])
 
                 # Calculate total number of blocks and zones of each dimension
                 jblocks = x2_blk[1] + 64 + x2_blk[0]
                 kblocks = x3_blk[1] + 64 + x3_blk[0]
                 jzones = (jblocks)/ncpu2[0] 
                 kzones = (kblocks)/ncpu2[1]
-                
+		check2 = [x2_blk[0], x2_blk[1], 64]
+		check3 = [x3_blk[0], x3_blk[1], 64]
+
+		flag2 = check_blocks(check2, jzones)
+		flag3 = check_blocks(check3, kzones)
+
+		if((flag2 != 0) & (flag3 ==0)):
+			test_cpu = mincpu(int(ncpu2[0]), jblocks, check2)
+			print("One of NBL parameters in x2 direction is less than %d")%(jzones)
+			print("Would you like to auto correct cpus in the x2 direction from %d to %d?"%(ncpu2[0], test_cpu))
+			ans = input("Enter (y/n):")
+       			if(ans in ['y','Y','yea','yes','Yes','Yeah','yeah']):
+                		ncpu2 = [test_cpu, ncpu2[1]]
+				jzones = (jblocks)/ncpu2[0]
+        		else:
+               			jzones = 3.5
+               			kzones = 3.5
+                if((flag3 != 0) & (flag2 ==0)):
+			test_cpu = mincpu(int(ncpu2[1]), kblocks, check3)
+			print("One of NBL parameters in x3 direction is less than %d")%(kzones)
+			print("Would you like to auto correct cpus in the x3 direction from %d to %d?"%(ncpu2[1], test_cpu))
+			ans = input("Enter (y/n):")
+        		if(ans in ['y','Y','yea','yes','Yes','Yeah','yeah']):
+                		ncpu2 = [ncpu2[0], test_cpu]
+				kzones = (kblocks)/ncpu2[1]				
+       			else:
+                		jzones = 3.5
+                		kzones = 3.5
+                if((flag3 != 0) & (flag2 != 0)):
+			test_cpu2 = mincpu(int(ncpu2[0]), jblocks, check2)
+			test_cpu3 = mincpu(int(ncpu2[1]), kblocks, check3)
+			print("One of NBL parameters in x2 and x3 directions is less than %d or %d")%(jzones, kzones)
+			print("Would you like to auto correct cpus in the x2 and x3 direction from (%d, %d) to (%d, %d)?"%(ncpu2[0],ncpu2[1], test_cpu2, test_cpu3))
+			ans = input("Enter (y/n):")
+        		if(ans in ['y','Y','yea','yes','Yes','Yeah','yeah']):
+                		ncpu2 = [test_cpu2, test_cpu2]
+				jzones = (jblocks)/ncpu2[0]
+				kzones = (kblocks)/ncpu2[1]
+       			else:
+               			jzonws = 3.5
+               			kzones = 3.5
+
+			
                 if((jzones %1 != 0) or (kzones %1 != 0)):
                         print('\n\n********************************************************')
-                        print('Non integer number of zones. Please Re-enter Parameters.') 
+                        print('Non integer number of zones or improper configuration. Please Re-enter Parameters.') 
                         print('********************************************************\n\n')
-
+		
         # Output Calculations for looking over
         print("\n")
         print(("First x2 low-res zone: %.4f km\n") %(x2_min1*1.e-5*-1))
@@ -501,5 +621,3 @@ f.close()
 
 
 print ('\n\n***DONE***\n\n')
-
-

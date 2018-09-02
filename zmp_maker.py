@@ -1,4 +1,4 @@
-# Ramanakumar Sankar and Noah Nodolski 2/22/2018
+# Noah Nodolski and Ramanakumar Sankar 5/2/2018
 import numpy as np
 import sys
 
@@ -50,37 +50,8 @@ def get_inp_tuple(default1, default2):
 
 
 print("\n\n\n")
-s = """      ___          ___          ___                               
-     /\__\        /\  \        /\  \                              
-    /::|  |      |::\  \      /::\  \                             
-   /:/:|  |      |:|:\  \    /:/\:\__\                            
-  /:/|:|  |__  __|:|\:\  \  /:/ /:/  /                            
- /:/ |:| /\__\/::::|_\:\__\/:/_/:/  /                             
- \/__|:|/:/  /\:\~~\  \/__/\:\/:/  /                              
-     |:/:/  /  \:\  \       \::/__/                               
-     |::/  /    \:\  \       \:\  \                               
-     |:/  /      \:\__\       \:\__\                              
-     |/__/        \/__/        \/__/                              
-      ___          ___          ___          ___          ___     
-     /\  \        /\  \        /|  |        /\__\        /\  \    
-    |::\  \      /::\  \      |:|  |       /:/ _/_      /::\  \   
-    |:|:\  \    /:/\:\  \     |:|  |      /:/ /\__\    /:/\:\__\  
-  __|:|\:\  \  /:/ /::\  \  __|:|  |     /:/ /:/ _/_  /:/ /:/  /  
- /::::|_\:\__\/:/_/:/\:\__\/\ |:|__|____/:/_/:/ /\__\/:/_/:/__/___
- \:\~~\  \/__/\:\/:/  \/__/\:\/:::::/__/\:\/:/ /:/  /\:\/:::::/  /
-  \:\  \       \::/__/      \::/~~/~     \::/_/:/  /  \::/~~/~~~~ 
-   \:\  \       \:\  \       \:\~~\       \:\/:/  /    \:\~~\     
-    \:\__\       \:\__\       \:\__\       \::/  /      \:\__\    
-     \/__/        \/__/        \/__/        \/__/        \/__/   """
-   
-
-
-
-
-print(s)
-print("\n\n\n")
 print('\n=============================================')
-print('   intiial conditions and x1 grid generation   ')
+print(' Initial conditions and x1 grid generation   ')
 print('=============================================\n')
 
 
@@ -149,6 +120,8 @@ ncollider = ntarget + nbef + naft
 
 print("Collider zone: %d blocks, from %.4f m before to %.4f m after"%(ncollider,lbef/100., laft/100.))
 #print("Total block remaining: %d"%(ntot - ncollider))
+
+print("\n")
 
 ## Add to the blocks array
 blocks = [[nbef + ntarget + naft, 1., 1., lbef + s + laft]]
