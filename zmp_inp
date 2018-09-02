@@ -21,10 +21,10 @@
             XPCLE    = .false. /
  &PRECONF   SMALL_NO = 1.0D-99,
             LARGE_NO = 1.0D+99 /
- &ARRAYCONF IZONES   = 70 ,
-            JZONES   = 136,
-            KZONES   = 136,
-            MAXIJK   = 136 /
+ &ARRAYCONF IZONES   = 63 ,
+            JZONES   = 126,
+            KZONES   = 126,
+            MAXIJK   = 126 /
  &ATMCONF   XGND     = .false.,
             XJUP     = .false.,
             XJUP_DRAKE = .true.,
@@ -40,21 +40,21 @@
  &ojb nojs(1)=2 /
  &ikb niks(1)=2 /
  &okb noks(1)=2 /
-$ggen1 nbl=57,x1min=2.0117e+07,x1max=2.1063e+07,igrid=-1,x1rat=1.050,lgrid=.false. /
+$ggen1 nbl=44,x1min=2.0072e+07,x1max=2.1063e+07,igrid=-1,x1rat=1.076,lgrid=.false. /
 $ggen1 nbl=128,x1min=2.1063e+07,x1max=2.1463e+07,igrid=1,x1rat=1.000,lgrid=.false. /
-$ggen1 nbl=116,x1min=2.1463e+07,x1max=2.4764e+07,igrid=1,x1rat=1.030,lgrid=.false. /
-$ggen1 nbl=119,x1min=2.4764e+07,x1max=3.6664e+07,igrid=1,x1rat=1.000,lgrid=.true. /
-$ggen2 nbl=104,x2min=-1.0028e+07,x2max=-1.0000e+05,igrid=-1,x2rat=1.050,lgrid=.false. /
+$ggen1 nbl=140,x1min=2.1463e+07,x1max=3.3126e+07,igrid=1,x1rat=1.035,lgrid=.false. /
+$ggen1 nbl=66,x1min=3.3126e+07,x1max=5.9526e+07,igrid=1,x1rat=1.000,lgrid=.true. /
+$ggen2 nbl=94,x2min=-6.1705e+06,x2max=-1.0000e+05,igrid=-1,x2rat=1.050,lgrid=.false. /
 $ggen2 nbl=64,x2min=-1.0000e+05,x2max=1.0000e+05,igrid=1,x2rat=1.000,lgrid=.false. /
-$ggen2 nbl=104,x2min=1.0000e+05,x2max=1.0028e+07,igrid=1,x2rat=1.050,lgrid=.true. /
-$ggen3 nbl=104,x3min=-1.0028e+07,x3max=-1.0000e+05,igrid=-1,x3rat=1.050,lgrid=.false. /
+$ggen2 nbl=94,x2min=1.0000e+05,x2max=6.1705e+06,igrid=1,x2rat=1.050,lgrid=.true. /
+$ggen3 nbl=94,x3min=-6.1705e+06,x3max=-1.0000e+05,igrid=-1,x3rat=1.050,lgrid=.false. /
 $ggen3 nbl=64,x3min=-1.0000e+05,x3max=1.0000e+05,igrid=1,x3rat=1.000,lgrid=.false. /
-$ggen3 nbl=104,x3min=1.0000e+05,x3max=1.0028e+07,igrid=1,x3rat=1.050,lgrid=.true. /
+$ggen3 nbl=94,x3min=1.0000e+05,x3max=6.1705e+06,igrid=1,x3rat=1.050,lgrid=.true. /
  &grvcon /
  &radcon /
  &eqos gamma=1.4,mmw=1.0D0 /
  &pgen r=5.0000e+04, x10=2.1213e+07 , d0=0.917, e0=0.6, v11=-6.14e+06, e1=0.0, 
-     dx1safe=1.0460e+06 ,zpost0=-2.50e07,dzpost=4.0e07,theta0=0.7854,
+     dx1safe=1.0911e+06 ,zpost0=-2.50e07,dzpost=4.0e07,theta0=0.7854,
      lat0=44.02 /
  &gcon igcon=5,x1fac=1.0/
  &iocon thdf=0.0, dthdf=0.25, ttsl=0.0, dttsl=0.25, tpcle=0.0, dtpcle=0.5 /

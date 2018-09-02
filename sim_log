@@ -12,17 +12,17 @@ Starting Height = 150.0 km
 
 Entry Angle = 45.0 degrees
 
-Length before impactor in x1 direction = 9.5 km
+Length before impactor in x1 direction = 9.9 km
 
-Length after impactor in x1 direction = 152.0 km
+Length after impactor in x1 direction = 380.6 km
 
-Length below impactor in x2 direction = 100.3 km
+Length below impactor in x2 direction = 61.7 km
 
-Length above impactor in x2 direction = 100.3 km
+Length above impactor in x2 direction = 61.7 km
 
-Length below impactor in x3 direction = 100.3 km
+Length below impactor in x3 direction = 61.7 km
 
-Length above impactor in x3 direction = 100.3 km
+Length above impactor in x3 direction = 61.7 km
 
 Processors configuration [(x1) x (x2) x (x3)] = 6 x 2 x 2
 
