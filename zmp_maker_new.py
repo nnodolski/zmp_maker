@@ -212,6 +212,12 @@ while(good == False):
                                 lmax2 = ltry - rtry
                                 rmax2 = maxr
 
+                print("Cutting zone after at %d - max resolution %.3e"%(nmax2, rmax2))
+
+                nmax2 = get_nbl(0., lmax2, sres, r[1])
+                lmax2 = sres*(1.-(r[1]**(nmax2)))/(1.-r[1])
+                rmax2 = sres*(r[1])**(nmax2-1)
+
                 blocks2.append([nmax2, 1., r[1], lmax2])
 
                 ## find the number of flat zones
